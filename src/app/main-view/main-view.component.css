@@ -1,0 +1,33 @@
+.navbar-custom {
+    background-color: #9797A4;
+    display:flex;
+    justify-content: left;
+    height: 4rem;
+}
+
+.title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    font-size: 30px;
+    margin-top: 5px;
+    color: white;
+}
+
+.gridOuter {
+    padding: 3rem 0rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.gridBody {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(23rem, 100%), 1fr));
+    grid-gap: 2rem;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+}
+  

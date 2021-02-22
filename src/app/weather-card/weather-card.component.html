@@ -1,0 +1,35 @@
+<div class="card cardOuter" style="width: 20rem; height: 18rem;" (click)="onClick()">
+  <div class="card-body cardBody">
+    <div *ngIf="(emptyCard == true && firstTime == true) || isError == true" class = "emptyCard">
+      <form [formGroup]="checkoutForm" (ngSubmit)="getWeather()" style = "height: 100%;">
+        <div class = "formContent" >
+          <label for="cityName">
+            <h2 *ngIf="emptyCard == true && firstTime == true">Enter City Name</h2>
+            <h2 *ngIf="isError == true">Invalid City Name!</h2>
+          </label>
+          <input id="cityName" type="text" formControlName="cityName">
+          <button type="submit" class="btn btn-light mb-3">Get Weather</button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="isSuccess == true" class = "successCard">
+      <h3>{{cityName}}</h3>
+      <img src="{{imageType}}">
+      <h4 *ngIf="isEdit == false">{{weatherStatus}}</h4>
+      <h4 *ngIf="isEdit == false">{{temperature}}°C</h4>
+      <button *ngIf="isEdit == false" (click)="toggleEdit()" type="submit" class="btn btn-light mb-3">Edit</button>
+      <form *ngIf="isEdit == true" [formGroup]="checkoutForm" (ngSubmit)="getWeather()" style = "height: 100%;">
+        <div class = "formContent" >
+          <label for="cityName">
+            <h2 *ngIf="emptyCard == true && firstTime == true">Edit City</h2>
+          </label>
+          <input id="cityName" type="text" formControlName="cityName">
+          <div style = "width: 100%; display: flex; justify-content:space-around">
+            <button type="submit" class="btn btn-light mb-3">Submit</button>
+            <button type="submit" (click)="toggleEdit()" class="btn btn-light mb-3">Back</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
