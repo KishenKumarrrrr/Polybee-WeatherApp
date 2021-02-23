@@ -5,7 +5,7 @@
         <div class = "formContent" >
           <label for="cityName">
             <h2 *ngIf="emptyCard == true && firstTime == true">Enter City Name</h2>
-            <h2 *ngIf="isError == true">Invalid City Name!</h2>
+            <h2 *ngIf="isError == true">{{errorMessage}}</h2>
           </label>
           <input id="cityName" type="text" formControlName="cityName">
           <button type="submit" class="btn btn-light mb-3">Get Weather</button>

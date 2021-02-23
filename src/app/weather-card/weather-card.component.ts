@@ -27,6 +27,7 @@ export class WeatherCardComponent implements OnInit {
   weatherStatus:string;
   temperature:number;
   imageType:string;
+  errorMessage:string;
 
   checkoutForm = this.formBuilder.group({
     cityName: ''
@@ -40,10 +41,18 @@ export class WeatherCardComponent implements OnInit {
     if (localStorage.getItem(String(this.index)) != null) {
       console.log(JSON.parse(localStorage.getItem(String(this.index))));
       this.localData = JSON.parse(localStorage.getItem(String(this.index)));
+      this.setLocalData();
       this.isSuccess = true;
       this.isError = false;
       this.firstTime = false;
     }
+  }
+
+  setLocalData(): void {
+    this.cityName = this.localData.cityName;
+    this.weatherStatus = this.localData.weatherStatus;
+    this.temperature = this.localData.temperature;
+    this.imageType = this.localData.imageType;
   }
 
   onClick(): void {
@@ -68,7 +77,8 @@ export class WeatherCardComponent implements OnInit {
   }
 
   processResult(result) {
-    if (result == "Error") {
+    if (typeof result == "string") {
+      this.errorMessage = result;
       this.isError = true;
       this.firstTime = false;
       this.isSuccess = false;

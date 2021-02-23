@@ -20,6 +20,6 @@ export class WeatherService {
 
   handleError(error: HttpErrorResponse) : Observable<any> {
     console.log(error);
-    return of("Error");
+    return of(error.error.message);
   }
 }
