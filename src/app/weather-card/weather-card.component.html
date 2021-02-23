@@ -1,11 +1,11 @@
-<div class="card cardOuter" style="width: 20rem; height: 18rem;" (click)="onClick()">
+<div class="card cardOuter" style="width: 20rem; height: 25rem;" (click)="onClick()">
   <div class="card-body cardBody">
     <div *ngIf="(emptyCard == true && firstTime == true) || isError == true" class = "emptyCard">
       <form [formGroup]="checkoutForm" (ngSubmit)="getWeather()" style = "height: 100%;">
         <div class = "formContent" >
           <label for="cityName">
             <h2 *ngIf="emptyCard == true && firstTime == true">Enter City Name</h2>
-            <h2 *ngIf="isError == true">{{errorMessage}}</h2>
+            <h2 *ngIf="isError == true" class = "errorMessage">{{errorMessage}}</h2>
           </label>
           <input id="cityName" type="text" formControlName="cityName">
           <button type="submit" class="btn btn-light mb-3">Get Weather</button>
@@ -13,11 +13,15 @@
       </form>
     </div>
     <div *ngIf="isSuccess == true" class = "successCard">
-      <h3>{{cityName}}</h3>
+      <h6>{{cityName}}</h6>
       <img src="{{imageType}}">
-      <h4 *ngIf="isEdit == false">{{weatherStatus}}</h4>
-      <h4 *ngIf="isEdit == false">{{temperature}}°C</h4>
+      <h6 *ngIf="isEdit == false">{{weatherStatus}}</h6>
+      <h6 *ngIf="isEdit == false">Temp: {{temperature}}°C</h6>
+      <h6 *ngIf="isEdit == false">Min Temp: {{tempMin}}°C</h6>
+      <h6 *ngIf="isEdit == false">Max Temp: {{tempMax}}°C</h6>
+      <h6 *ngIf="isEdit == false">Humidity: {{humidity}}%</h6>
       <button *ngIf="isEdit == false" (click)="toggleEdit()" type="submit" class="btn btn-light mb-3">Edit</button>
+      <p *ngIf="isEdit == false">Updated: {{lastUpdated}}</p>
       <form *ngIf="isEdit == true" [formGroup]="checkoutForm" (ngSubmit)="getWeather()" style = "height: 100%;">
         <div class = "formContent" >
           <label for="cityName">

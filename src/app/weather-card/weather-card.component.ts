@@ -28,6 +28,10 @@ export class WeatherCardComponent implements OnInit {
   temperature:number;
   imageType:string;
   errorMessage:string;
+  tempMin:number;
+  tempMax:number;
+  humidity:number;
+  lastUpdated:string;
 
   checkoutForm = this.formBuilder.group({
     cityName: ''
@@ -39,7 +43,6 @@ export class WeatherCardComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem(String(this.index)) != null) {
-      console.log(JSON.parse(localStorage.getItem(String(this.index))));
       this.localData = JSON.parse(localStorage.getItem(String(this.index)));
       this.setLocalData();
       this.isSuccess = true;
@@ -53,6 +56,10 @@ export class WeatherCardComponent implements OnInit {
     this.weatherStatus = this.localData.weatherStatus;
     this.temperature = this.localData.temperature;
     this.imageType = this.localData.imageType;
+    this.tempMin = this.localData.tempMin;
+    this.tempMax = this.localData.tempMax;
+    this.humidity = this.localData.humidity;
+    this.lastUpdated = this.localData.lastUpdated;
   }
 
   onClick(): void {
@@ -95,12 +102,22 @@ export class WeatherCardComponent implements OnInit {
       this.temperature = Math.round(result.main.temp - 273);
       this.imageType =  "http://openweathermap.org/img/wn/" + 
       result.weather[0].icon + "@2x.png";
+      this.tempMin = Math.round(result.main.temp_min - 273);
+      this.tempMax = Math.round(result.main.temp_max - 273);
+      this.humidity = result.main.humidity;
+      this.lastUpdated = new Date().toLocaleString("en-US", {timeZone: 'Asia/Singapore'});
+
+      //Save Local Data object
       this.localData = {
         cityName: result.name,
         weatherStatus: result.weather[0].main,
         temperature: Math.round(result.main.temp - 273),
         imageType:  "http://openweathermap.org/img/wn/" + 
-      result.weather[0].icon + "@2x.png"
+      result.weather[0].icon + "@2x.png",
+        tempMin: Math.round(result.main.temp_min - 273),
+        tempMax: Math.round(result.main.temp_max - 273),
+        humidity: result.main.humidity,
+        lastUpdated: this.lastUpdated,
       }
       localStorage.setItem(String(this.index), JSON.stringify(this.localData));
     }
