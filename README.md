@@ -4,7 +4,7 @@
 
 This web application was made as part of my application to [Polybee](https://www.polybee.co/) for a position as a Full Stack Engineer intern for summer 2021 :technologist: .
 
-The application is made using the Angular framework. Having no prior experience in Angular, I picked it up through several crash course videos in 24 hours to produce this application. As such, the design is not as modular and clean as I would like it to be as I am still learning about Angular design paradigms.
+The application is made using the Angular framework. Having no prior experience in Angular, I picked it up through a crash course video and an Angular tutorial in 24 hours to produce this application. As such, the design is not as modular and clean as I would like it to be as I am still learning about Angular design paradigms.
 
 ## Specifications
 
